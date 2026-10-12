@@ -251,6 +251,75 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &2581134013920369640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5242170196979404902}
+  - component: {fileID: 3228971505427989494}
+  - component: {fileID: 3882276180473653421}
+  m_Layer: 0
+  m_Name: TargetFinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5242170196979404902
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2581134013920369640}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2119912904149500872}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &3228971505427989494
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2581134013920369640}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 10
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3882276180473653421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2581134013920369640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f12bfaa18ac426419bf1f8b3ad7c3b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShootingTargetFinder
+  shootingController: {fileID: 8417117769286098163}
+  findCollider: {fileID: 3228971505427989494}
+  findTargetFrequency: 1
 --- !u!1 &4222701789822875313
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +335,8 @@ GameObject:
   - component: {fileID: 393497300825097757}
   - component: {fileID: 8094473992785737903}
   - component: {fileID: 9212939516817023500}
+  - component: {fileID: 8417117769286098163}
+  - component: {fileID: 2170023432094654259}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -289,6 +360,7 @@ Transform:
   - {fileID: 4970146593775447288}
   - {fileID: 7534599044346918805}
   - {fileID: 8663808786550517962}
+  - {fileID: 5242170196979404902}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &2457659853795799547
@@ -389,6 +461,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InputActionSprintProider
   sprintController: {fileID: 4856208875367615248}
   playerInputController: {fileID: 393497300825097757}
+--- !u!114 &8417117769286098163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4222701789822875313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc35533408fd464d9d44e0b505e0652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerShootingController
+--- !u!114 &2170023432094654259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4222701789822875313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30eb4e8d62121141b85fc3053619415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShootingVisualizer
+  shootingController: {fileID: 8417117769286098163}
+  markerPrefab: {fileID: 6031849938813093700, guid: f97ca49c5d8114b4c943b6076341a8f9, type: 3}
 --- !u!1 &8111302100329292378
 GameObject:
   m_ObjectHideFlags: 0
