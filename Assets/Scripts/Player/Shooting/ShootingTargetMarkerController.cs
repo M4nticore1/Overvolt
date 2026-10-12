@@ -11,6 +11,14 @@ public class ShootingTargetMarkerController : MonoBehaviour
     [SerializeField] private GameObject markerPrefab;
     private GameObject spawnedMarker;
 
+    private void Awake()
+    {
+        if (shootingController == null)
+            Debug.LogError("ShootingController is not valid!");
+        if (markerPrefab == null)
+            Debug.LogError("MarkerPrefab is not valid!");
+    }
+
     private void OnEnable()
     {
         shootingController.OnTargetSet += HandleTargetSet;
@@ -30,21 +38,15 @@ public class ShootingTargetMarkerController : MonoBehaviour
 
     private void DestroyMarker()
     {
-        if (spawnedMarker == null) {
-            Debug.LogError("SpawnedMarker is not valid!");
-            return;
-        }
+        if (spawnedMarker == null) return;
 
         Destroy(spawnedMarker.gameObject);
     }
 
     private void HandleTargetSet(IPlayerTarget target)
     {
-        if (spawnedMarker != null) {
-            DestroyMarker();
-        }
-
-        SpawnMarker(target.transform);
+        DestroyMarker();
+        SpawnMarker(target.PlayerTargetMarkerTransform);
     }
 
     private void HandleTargetRemoved(IPlayerTarget target)

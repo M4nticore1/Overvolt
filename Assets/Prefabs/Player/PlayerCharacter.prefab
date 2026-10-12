@@ -319,7 +319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShootingTargetFinder
   shootingController: {fileID: 8417117769286098163}
   findCollider: {fileID: 3228971505427989494}
-  findTargetFrequency: 1
+  findTargetFrequency: 0.2
 --- !u!1 &4222701789822875313
 GameObject:
   m_ObjectHideFlags: 0

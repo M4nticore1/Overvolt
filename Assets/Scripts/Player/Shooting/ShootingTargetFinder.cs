@@ -10,6 +10,7 @@ public class ShootingTargetFinder : MonoBehaviour
 
     [Header("Params")]
     [SerializeField] private float findTargetFrequency = 1f;
+    private float findTimeTime = 0f;
 
     private List<IPlayerTarget> targetsList = new();
     private IPlayerTarget lastPlayerTarget;
@@ -34,33 +35,39 @@ public class ShootingTargetFinder : MonoBehaviour
 
     private void Update()
     {
-        float minDistance = Mathf.Infinity;
-        IPlayerTarget nearestTarget = null;
+        findTimeTime += Time.deltaTime;
 
-        for (int i = targetsList.Count - 1; i >= 0; i--) {
-            var target = targetsList[i];
+        if (findTimeTime >= findTargetFrequency) {
+            float minDistance = Mathf.Infinity;
+            IPlayerTarget nearestTarget = null;
 
-            if (target == null) {
-                targetsList.RemoveAt(i);
-                continue;
+            for (int i = targetsList.Count - 1; i >= 0; i--) {
+                var target = targetsList[i];
+
+                if (target == null) {
+                    targetsList.RemoveAt(i);
+                    continue;
+                }
+
+                var distance = Vector3.Distance(transform.position, target.transform.position);
+
+                if (distance > minDistance) {
+                    continue;
+                }
+
+                minDistance = distance;
+                nearestTarget = target;
             }
 
-            var distance = Vector3.Distance(transform.position, target.transform.position);
-
-            if (distance > minDistance) {
-                continue;
+            if (nearestTarget != null) {
+                lastPlayerTarget = nearestTarget;
+                shootingController.SetTarget(nearestTarget);
+            }
+            else if (lastPlayerTarget != null) {
+                shootingController.RemoveTarget(lastPlayerTarget);
             }
 
-            minDistance = distance;
-            nearestTarget = target;
-        }
-
-        if (nearestTarget != null) {
-            lastPlayerTarget = nearestTarget;
-            shootingController.SetTarget(nearestTarget);
-        }
-        else if (lastPlayerTarget != null) {
-            shootingController.RemoveTarget(lastPlayerTarget);
+            findTimeTime = 0f;
         }
     }
 
