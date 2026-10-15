@@ -1,19 +1,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
-public class ShootingTargetFinder : MonoBehaviour
+[RequireComponent(typeof(SphereCollider))]
+public class PlayerShootTargetFinder : MonoBehaviour
 {
     [Header("Main")]
-    [SerializeField] private PlayerShootingController shootingController;
-    [SerializeField] private Collider findCollider;
+    [SerializeField] private PlayerWeaponController weaponController;
+    [SerializeField] private PlayerShootTargetController shootingTargetController;
+    [SerializeField] private SphereCollider findingTrigger;
 
     [Header("Params")]
     [SerializeField] private float findTargetFrequency = 1f;
     private float findTimeTime = 0f;
 
     private List<IPlayerTarget> targetsList = new();
-    private IPlayerTarget lastPlayerTarget;
+    private IPlayerTarget lastTarget;
+
+    private void OnEnable()
+    {
+        weaponController.OnWeaponChanged += HandleWeaponChanged;
+    }
+
+    private void OnDisable()
+    {
+        weaponController.OnWeaponChanged -= HandleWeaponChanged;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -43,6 +54,12 @@ public class ShootingTargetFinder : MonoBehaviour
 
             for (int i = targetsList.Count - 1; i >= 0; i--) {
                 var target = targetsList[i];
+                if (target is MonoBehaviour targetMono && targetMono == null) {
+                    targetsList.RemoveAt(i);
+                    continue;
+                }
+
+                if (target.HealthComponent != null && !target.HealthComponent.IsAlive) continue;
 
                 if (target == null) {
                     targetsList.RemoveAt(i);
@@ -60,15 +77,20 @@ public class ShootingTargetFinder : MonoBehaviour
             }
 
             if (nearestTarget != null) {
-                lastPlayerTarget = nearestTarget;
-                shootingController.SetTarget(nearestTarget);
+                lastTarget = nearestTarget;
+                shootingTargetController.SetTarget(nearestTarget);
             }
-            else if (lastPlayerTarget != null) {
-                shootingController.RemoveTarget(lastPlayerTarget);
+            else if (lastTarget != null) {
+                shootingTargetController.RemoveTarget(lastTarget);
             }
 
             findTimeTime = 0f;
         }
+    }
+
+    private void SetFindingRadius(float radius)
+    {
+        findingTrigger.radius = radius;
     }
 
     private void AddTarget(IPlayerTarget target)
@@ -83,5 +105,12 @@ public class ShootingTargetFinder : MonoBehaviour
     private void RemoveTarget(IPlayerTarget target)
     {
         targetsList.Remove(target);
+    }
+
+    private void HandleWeaponChanged(Weapon weapon)
+    {
+        if (weapon == null) return;
+
+        SetFindingRadius(weapon.ShootDistance);
     }
 }

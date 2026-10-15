@@ -129,6 +129,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2137767394442241843, guid: 38330f3f61d089d438213efa8955b93e, type: 3}
+      propertyPath: healthComponent
+      value: 
+      objectReference: {fileID: 5077106520266501810}
     - target: {fileID: 7418170522816357358, guid: 38330f3f61d089d438213efa8955b93e, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -192,6 +196,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7418170522816357358, guid: 38330f3f61d089d438213efa8955b93e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1289902915445708127}
+    - targetCorrespondingSourceObject: {fileID: 7418170522816357358, guid: 38330f3f61d089d438213efa8955b93e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5077106520266501810}
   m_SourcePrefab: {fileID: 100100000, guid: 38330f3f61d089d438213efa8955b93e, type: 3}
 --- !u!1 &2539241575280620864 stripped
 GameObject:
@@ -260,7 +267,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5979d0673739bd34daba912cb73bd5ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  hitCollider: {fileID: 5851535957405712743}
+  healthComponent: {fileID: 5077106520266501810}
   playerTargetMarkerTransform: {fileID: 4258828497674774545}
+--- !u!114 &5077106520266501810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2539241575280620864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28d0e2a60aaaab745affb91810c0fdf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthComponent
+  maxHealth: 100
+  currentHealth: 100
 --- !u!4 &4167263240006230790 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8942609396041676200, guid: 38330f3f61d089d438213efa8955b93e, type: 3}

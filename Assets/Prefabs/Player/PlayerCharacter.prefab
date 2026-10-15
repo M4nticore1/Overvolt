@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7534599044346918805}
   - component: {fileID: 2647406631149788347}
   - component: {fileID: 1974811299378760591}
-  - component: {fileID: 2505808357532806155}
+  - component: {fileID: 341937354754204172}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: CharacterMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 0.9, y: 0.875, z: 0.9}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4154015288634097102}
   m_Father: {fileID: 2119912904149500872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2647406631149788347
@@ -91,29 +92,22 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &2505808357532806155
-CapsuleCollider:
+--- !u!114 &341937354754204172
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 212145273241739273}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99b3772a779098d45b8547ce277d8369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterRotationController
+  playerRoot: {fileID: 2119912904149500872}
+  moveController: {fileID: 5266136330282884228}
+  shootTargetController: {fileID: 8417117769286098163}
+  rotationSpeed: 7
 --- !u!1 &1042522581749778041
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,9 +311,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f12bfaa18ac426419bf1f8b3ad7c3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShootingTargetFinder
-  shootingController: {fileID: 8417117769286098163}
-  findCollider: {fileID: 3228971505427989494}
-  findTargetFrequency: 0.2
+  weaponController: {fileID: 1866713014785743130}
+  shootingTargetController: {fileID: 8417117769286098163}
+  findingTrigger: {fileID: 3228971505427989494}
+  findTargetFrequency: 0.1
 --- !u!1 &4222701789822875313
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,7 +330,9 @@ GameObject:
   - component: {fileID: 393497300825097757}
   - component: {fileID: 8094473992785737903}
   - component: {fileID: 9212939516817023500}
+  - component: {fileID: 1866713014785743130}
   - component: {fileID: 8417117769286098163}
+  - component: {fileID: 7257659488456306466}
   - component: {fileID: 2170023432094654259}
   m_Layer: 0
   m_Name: PlayerCharacter
@@ -461,6 +458,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InputActionSprintProider
   sprintController: {fileID: 4856208875367615248}
   playerInputController: {fileID: 393497300825097757}
+--- !u!114 &1866713014785743130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4222701789822875313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7308060e910b848bc6c77a1f7b8231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponController
+  weaponsList: {fileID: 11400000, guid: 29f9eb825f19f7148abb5f059f3cb9f4, type: 2}
+  defaultWeaponId: 0
+  weaponHolder: {fileID: 4154015288634097102}
 --- !u!114 &8417117769286098163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,9 +482,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 4222701789822875313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecc35533408fd464d9d44e0b505e0652, type: 3}
+  m_Script: {fileID: 11500000, guid: 622c55d52a2fa7f4fa8f650287a1490a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShootingController
+--- !u!114 &7257659488456306466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4222701789822875313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6aa99bcad4e9fc4e893ebd72b481fbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerShootingController
+  weaponController: {fileID: 1866713014785743130}
+  shootingTargetController: {fileID: 8417117769286098163}
+  rotationController: {fileID: 341937354754204172}
+  shootRotationThreshold: 0.9
 --- !u!114 &2170023432094654259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,6 +515,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShootingVisualizer
   shootingController: {fileID: 8417117769286098163}
   markerPrefab: {fileID: 6031849938813093700, guid: f97ca49c5d8114b4c943b6076341a8f9, type: 3}
+--- !u!1 &4836522525778034739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4154015288634097102}
+  m_Layer: 0
+  m_Name: WeaponHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4154015288634097102
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4836522525778034739}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.8333334, y: 0, z: 0}
+  m_LocalScale: {x: 1.1111112, y: 1.1428571, z: 1.1111112}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7534599044346918805}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8111302100329292378
 GameObject:
   m_ObjectHideFlags: 0

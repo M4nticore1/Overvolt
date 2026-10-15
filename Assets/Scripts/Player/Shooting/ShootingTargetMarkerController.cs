@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerShootingController))]
+[RequireComponent(typeof(PlayerShootTargetController))]
 public class ShootingTargetMarkerController : MonoBehaviour
 {
     [Header("Main")]
-    [SerializeField] private PlayerShootingController shootingController;
+    [SerializeField] private PlayerShootTargetController shootingController;
 
     [Header("Params")]
     [SerializeField] private GameObject markerPrefab;
@@ -38,9 +38,9 @@ public class ShootingTargetMarkerController : MonoBehaviour
 
     private void DestroyMarker()
     {
-        if (spawnedMarker == null) return;
-
-        Destroy(spawnedMarker.gameObject);
+        if (spawnedMarker != null) {
+            Destroy(spawnedMarker.gameObject);
+        }
     }
 
     private void HandleTargetSet(IPlayerTarget target)

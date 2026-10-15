@@ -1,50 +1,23 @@
-using System;
 using UnityEngine;
 
 public class PlayerShootingController : MonoBehaviour
 {
-    private static PlayerShootingController instance;
-    public static PlayerShootingController Instance => instance ??= FindFirstObjectByType<PlayerShootingController>();
+    [Header("Main")]
+    [SerializeField] private PlayerWeaponController weaponController;
+    [SerializeField] private PlayerShootTargetController shootingTargetController;
+    [SerializeField] private CharacterRotationController rotationController;
 
-    public IPlayerTarget CurrentTarget { get; private set; }
+    [Header("Params")]
+    [SerializeField] private float shootRotationThreshold = 0.9f;
 
-    public event Action<IPlayerTarget> OnTargetSet;
-    public event Action<IPlayerTarget> OnTargetRemoved;
+    private Weapon Weapon => weaponController.SpawnedWeapon;
 
-    private void Awake()
+    private void Update()
     {
-        instance = this;
-    }
+        if (Weapon == null) return;
 
-    public void SetTarget(IPlayerTarget target)
-    {
-        if (target == null) {
-            Debug.LogError("Target is not valid!");
-            return;
+        if (rotationController.RotationProgress >= shootRotationThreshold) {
+            Weapon.TryShootTarget(shootingTargetController.CurrentTarget);
         }
-
-        if (target == CurrentTarget) return;
-
-        if (CurrentTarget != null) {
-            RemoveTarget(CurrentTarget);
-        }
-
-        CurrentTarget = target;
-
-        OnTargetSet?.Invoke(target);
-    }
-
-    public void RemoveTarget(IPlayerTarget target)
-    {
-        if (target == null) {
-            Debug.LogError("Target is not valid!");
-            return;
-        }
-
-        if (target != CurrentTarget) return;
-
-        CurrentTarget = null;
-
-        OnTargetRemoved?.Invoke(target);
     }
 }
