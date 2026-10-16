@@ -15,6 +15,7 @@ public class PlayerShootingController : MonoBehaviour
     private void Update()
     {
         if (Weapon == null) return;
+        if (shootingTargetController.CurrentTarget == null) return;
 
         if (rotationController.RotationProgress >= shootRotationThreshold) {
             Weapon.TryShootTarget(shootingTargetController.CurrentTarget);

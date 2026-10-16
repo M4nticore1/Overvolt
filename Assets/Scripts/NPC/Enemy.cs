@@ -12,8 +12,11 @@ public class Enemy : MonoBehaviour, IPlayerTarget
     private float currentDestroyTime = 0;
 
     [Header("IPlayerTarget")]
-    [SerializeField] private Transform playerTargetMarkerTransform;
-    public Transform PlayerTargetMarkerTransform => playerTargetMarkerTransform;
+    [SerializeField] private Transform playerTargetShootPoint;
+    public Transform PlayerTargetShootPoint => playerTargetShootPoint;
+
+    [SerializeField] private Transform playerTargetMarkerPoint;
+    public Transform PlayerTargetMarkerPoint => playerTargetMarkerPoint;
 
     private void OnEnable()
     {

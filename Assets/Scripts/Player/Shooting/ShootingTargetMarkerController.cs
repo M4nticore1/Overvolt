@@ -46,7 +46,7 @@ public class ShootingTargetMarkerController : MonoBehaviour
     private void HandleTargetSet(IPlayerTarget target)
     {
         DestroyMarker();
-        SpawnMarker(target.PlayerTargetMarkerTransform);
+        SpawnMarker(target.PlayerTargetMarkerPoint);
     }
 
     private void HandleTargetRemoved(IPlayerTarget target)

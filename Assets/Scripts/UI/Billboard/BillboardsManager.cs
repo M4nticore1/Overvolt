@@ -10,7 +10,7 @@ public class BillboardsManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance) {
+        if (instance != null && instance != this) {
             Debug.LogError($"[{nameof(BillboardsManager)}] Another instance already exists in the scene! Destroying this.");
             Destroy(gameObject);
             return;

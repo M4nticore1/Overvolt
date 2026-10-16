@@ -131,6 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 681609167886681436}
   - component: {fileID: 2610050999877890708}
+  - component: {fileID: -6559448751104979949}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -170,7 +171,23 @@ MonoBehaviour:
   weaponId: 0
   muzzlePoint: {fileID: 9168176236001667772}
   damage: 10
+  minDamage: 5
+  maxSpreadAngle: 5
+  shootDistance: 10
   damageFalloffExponent: 10
   fireRate: 600
   bulletsCount: 1
-  shootDistance: 10
+  weaponTracer: {fileID: 553094050411485913, guid: 8c789661c32293f4b97731b5f61bb46b, type: 3}
+--- !u!114 &-6559448751104979949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8917506173806788796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de921971c7be13a49b387b16da216b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponVFXController
+  weapon: {fileID: 2610050999877890708}

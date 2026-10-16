@@ -6,6 +6,13 @@ public enum WeaponId
     Ratchet
 }
 
+public struct BulletShotData
+{
+    public Vector3 StartPosition;
+    public Vector3 Direction;
+    public float Distance;
+}
+
 public class Weapon : MonoBehaviour
 {
     [Header("Main")]
@@ -15,17 +22,18 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Transform muzzlePoint;
     public Transform MuzzlePoint => muzzlePoint;
 
-    [Header("Params")]
+    [Header("Damage")]
     [SerializeField] private float damage = 10;
     public float Damage => damage;
 
     [SerializeField] private float minDamage = 5;
     public float MinDamage => minDamage;
 
-    [SerializeField] private float fireRate = 600;
-    public float FireRate => fireRate;
-    private float nextFireTime = 0f;
+    [Header("Sperad")]
+    [SerializeField] private float maxSpreadAngle = 5;
+    public float MaxSpreadAngle => maxSpreadAngle;
 
+    [Header("Distance")]
     [SerializeField] private float shootDistance = 10;
     public float ShootDistance => shootDistance;
 
@@ -33,9 +41,19 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float damageFalloffExponent = 1f;
     public float DamageFalloffExponent => damageFalloffExponent;
 
+    [Header("Fire")]
+    [SerializeField] private float fireRate = 600;
+    public float FireRate => fireRate;
+    private float nextFireTime = 0f;
+
     [SerializeField] private int bulletsCount = 1;
     public int BulletsCount => bulletsCount;
 
+    [Header("VFX")]
+    [SerializeField] private WeaponTracer weaponTracer;
+    public WeaponTracer WeaponTracer => weaponTracer;
+
+    public event Action<BulletShotData> OnBulletShot;
     public event Action OnShot;
 
     public bool TryShootTarget(IPlayerTarget target)
@@ -52,15 +70,18 @@ public class Weapon : MonoBehaviour
         var targetPoint = Vector3.zero;
 
         if (target is MonoBehaviour targetMono && targetMono != null) {
-            targetPoint = target.transform.position + Vector3.up * 1f;
+            targetPoint = target.PlayerTargetShootPoint.position;
         }
         else {
             targetPoint = muzzlePoint.position + muzzlePoint.forward * shootDistance;
         }
 
-        var shootDirection = (targetPoint - muzzlePoint.position).normalized;
-
         for (int i = 0; i < bulletsCount; i++) {
+            var shootDirection = (targetPoint - muzzlePoint.position).normalized;
+
+            var spreadRotation = Quaternion.Euler(GetRandomSpread(), GetRandomSpread(), 0f);
+            shootDirection = spreadRotation * shootDirection;
+
             if (Physics.Raycast(muzzlePoint.position, shootDirection, out var hit, ShootDistance)) {
                 var damageables = hit.collider.GetComponents<IDamageable>();
 
@@ -71,6 +92,13 @@ public class Weapon : MonoBehaviour
                     damageable.TakeDamage(GetDamageAtDistance(hit.distance));
                 }
             }
+
+            var shotData = new BulletShotData {
+                StartPosition = muzzlePoint.position,
+                Direction = shootDirection,
+                Distance = hit.distance
+            };
+            OnBulletShot?.Invoke(shotData);
         }
 
         nextFireTime = Time.time + (1 / (fireRate / 60));
@@ -84,5 +112,10 @@ public class Weapon : MonoBehaviour
         var multiplier = 1f - Mathf.Pow(t, damageFalloffExponent);
 
         return Mathf.Max(damage * Mathf.Max(0f, multiplier), minDamage);
+    }
+
+    private float GetRandomSpread()
+    {
+        return UnityEngine.Random.Range(-maxSpreadAngle, MaxSpreadAngle);
     }
 }
