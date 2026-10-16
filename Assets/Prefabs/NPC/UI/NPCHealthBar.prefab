@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Billboard
   invertRotation: 0
-  useParentRotation: 0
+  useParentRotation: 1
 --- !u!1 &4466079704725481624
 GameObject:
   m_ObjectHideFlags: 0

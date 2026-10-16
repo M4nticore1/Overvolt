@@ -50,11 +50,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2610050999877890708, guid: e906e877be87c074c9d1b4ba7138e0e6, type: 3}
       propertyPath: damage
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2610050999877890708, guid: e906e877be87c074c9d1b4ba7138e0e6, type: 3}
       propertyPath: fireRate
-      value: 600
+      value: 360
       objectReference: {fileID: 0}
     - target: {fileID: 2610050999877890708, guid: e906e877be87c074c9d1b4ba7138e0e6, type: 3}
       propertyPath: minDamage

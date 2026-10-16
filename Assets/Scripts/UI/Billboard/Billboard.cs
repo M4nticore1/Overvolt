@@ -10,16 +10,12 @@ public class Billboard : MonoBehaviour
 
     private void OnEnable()
     {
-        if (billboardsManager != null) {
-            BillboardsManager.Instance.Register(this);
-        }
+        BillboardsManager.Instance.Register(this);
     }
 
     private void OnDisable()
     {
-        if (billboardsManager != null) {
-            BillboardsManager.Instance.Unregister(this);
-        }
+        BillboardsManager.Instance.Unregister(this);
     }
 
     private void Awake()

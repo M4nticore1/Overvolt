@@ -325,6 +325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2119912904149500872}
   - component: {fileID: 2457659853795799547}
+  - component: {fileID: 686988202813102254}
   - component: {fileID: 5266136330282884228}
   - component: {fileID: 4856208875367615248}
   - component: {fileID: 393497300825097757}
@@ -385,6 +386,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &686988202813102254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4222701789822875313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b257e16b7b890f46ab4e7b818d619ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCharacter
 --- !u!114 &5266136330282884228
 MonoBehaviour:
   m_ObjectHideFlags: 0

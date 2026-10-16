@@ -3,19 +3,20 @@ using UnityEngine;
 
 public class BillboardsManager : MonoBehaviour
 {
-    public static BillboardsManager Instance { get; private set; }
+    private static BillboardsManager instance;
+    public static BillboardsManager Instance=> instance ??= FindFirstObjectByType<BillboardsManager>();
 
     private readonly List<Billboard> billboards = new();
 
     private void Awake()
     {
-        if (Instance) {
+        if (instance) {
             Debug.LogError($"[{nameof(BillboardsManager)}] Another instance already exists in the scene! Destroying this.");
             Destroy(gameObject);
             return;
         }
 
-        Instance = this;
+        instance = this;
     }
 
     public void Register(Billboard billboard)
