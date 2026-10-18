@@ -22,7 +22,7 @@ public class OnScreenJoystick : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         }
     }
 
-    private float AreaRadius => Mathf.Min(area.sizeDelta.x, area.sizeDelta.y) / 2;
+    private float AreaRadius => Mathf.Min(area.rect.width, area.rect.height) / 2f;
 
     private void Awake()
     {
@@ -63,11 +63,10 @@ public class OnScreenJoystick : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
     private void ApplyJoystickInput(PointerEventData eventData)
     {
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(area, eventData.position, UICamera, out Vector2 localPoint)) {
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(area, eventData.position, null, out Vector2 localPoint)) {
             var clampedPosition = Vector2.ClampMagnitude(localPoint, AreaRadius);
-            handle.localPosition = clampedPosition;
-
             var input = AreaRadius > 0f ? clampedPosition / AreaRadius : Vector2.zero;
+
             MoveController.SetMoveInput(input);
         }
     }

@@ -5,29 +5,22 @@ public class Billboard : MonoBehaviour
     [SerializeField] private bool invertRotation = false;
     [SerializeField] private bool useParentRotation = false;
 
-    private Camera cam;
+    private Camera Cam => Camera.main;
     private BillboardsManager billboardsManager => BillboardsManager.Instance;
 
     private void OnEnable()
     {
-        BillboardsManager.Instance.Register(this);
+        billboardsManager.Register(this);
     }
 
     private void OnDisable()
     {
-        BillboardsManager.Instance.Unregister(this);
-    }
-
-    private void Awake()
-    {
-        cam = Camera.main;
+        billboardsManager.Unregister(this);
     }
 
     public void Tick()
     {
-        if (cam == null) return;
-
-        transform.LookAt(cam.transform.position, cam.transform.up);
+        transform.LookAt(Cam.transform.position, Cam.transform.up);
 
         if (invertRotation) {
             transform.Rotate(0f, 180f, 0f);

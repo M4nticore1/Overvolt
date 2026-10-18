@@ -27,7 +27,6 @@ public class VelociityProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Enter");
         if (destroyOnCollide && destroyCoroutine == null) {
             destroyCoroutine = StartCoroutine(DestroyDelay());
         }

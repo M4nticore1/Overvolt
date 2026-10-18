@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69378ce6af10424da10b3e440158c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyFindPlayerController
+  enemy: {fileID: 1289902915445708127}
   detectCollider: {fileID: 7505374456427903063}
   detectionStartPoint: {fileID: 2525443685639251987}
   detectionRange: 10
@@ -343,10 +344,16 @@ PrefabInstance:
       addedObject: {fileID: 1289902915445708127}
     - targetCorrespondingSourceObject: {fileID: 7418170522816357358, guid: 38330f3f61d089d438213efa8955b93e, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 389882302004036285}
+    - targetCorrespondingSourceObject: {fileID: 7418170522816357358, guid: 38330f3f61d089d438213efa8955b93e, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 5077106520266501810}
     - targetCorrespondingSourceObject: {fileID: 7418170522816357358, guid: 38330f3f61d089d438213efa8955b93e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 237962159169077194}
+    - targetCorrespondingSourceObject: {fileID: 7418170522816357358, guid: 38330f3f61d089d438213efa8955b93e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9120371051685533311}
   m_SourcePrefab: {fileID: 100100000, guid: 38330f3f61d089d438213efa8955b93e, type: 3}
 --- !u!1 &2539241575280620864 stripped
 GameObject:
@@ -363,18 +370,18 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 2
 --- !u!136 &5851535957405712743
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -437,11 +444,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5979d0673739bd34daba912cb73bd5ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  behaviourControllers:
+  - {fileID: 8908449802271291853}
+  - {fileID: 237962159169077194}
+  - {fileID: 9120371051685533311}
   hitCollider: {fileID: 5851535957405712743}
   healthComponent: {fileID: 5077106520266501810}
   destroyTime: 1
   playerTargetShootPoint: {fileID: 5460458091083557353}
   playerTargetMarkerPoint: {fileID: 4258828497674774545}
+--- !u!114 &389882302004036285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2539241575280620864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538ad6f134d4f9440b2d7b7456fa24bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCMovement
+  navAgent: {fileID: 8425151110426217858}
+  useTargetRotation: 1
+  rotationSpeed: 1
 --- !u!114 &5077106520266501810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,8 +494,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c76a40503cdfcf7488797d340d5b0a55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMoveController
-  navAgent: {fileID: 8425151110426217858}
+  enemy: {fileID: 1289902915445708127}
+  movement: {fileID: 389882302004036285}
   detectTargetController: {fileID: 8908449802271291853}
+  updateDestinationFrequency: 0.2
+--- !u!114 &9120371051685533311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2539241575280620864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a0c2d67b414a3e46a17e78f81c9eb3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttackController
+  enemy: {fileID: 1289902915445708127}
+  movement: {fileID: 389882302004036285}
+  healthComponent: {fileID: 5077106520266501810}
+  damage: 5
+  attackFrequency: 1
 --- !u!4 &4167263240006230790 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8942609396041676200, guid: 38330f3f61d089d438213efa8955b93e, type: 3}

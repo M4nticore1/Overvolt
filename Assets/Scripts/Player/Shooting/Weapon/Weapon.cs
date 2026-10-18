@@ -98,6 +98,7 @@ public class Weapon : MonoBehaviour
                 Direction = shootDirection,
                 Distance = hit.distance
             };
+
             OnBulletShot?.Invoke(shotData);
         }
 

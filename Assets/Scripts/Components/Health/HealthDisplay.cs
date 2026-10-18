@@ -17,7 +17,7 @@ public class HealthDisplay : MonoBehaviour
     [SerializeField, Min(0f)] private float visibilityTime = 0f;
 
     private Coroutine hideCoroutine;
-    private bool isDisplayed => content != null ? content.activeSelf && content.activeInHierarchy : true;
+    private bool IsShown => content != null ? content.activeInHierarchy : true;
     private bool isSubscribed;
 
     private void OnEnable()
@@ -36,14 +36,14 @@ public class HealthDisplay : MonoBehaviour
         UpdateDisplayed();
     }
 
-    public void SetHealthComponent(HealthComponent health)
+    public void SetHealthComponent(HealthComponent healthComponent)
     {
-        if (this.healthComponent == health)
+        if (this.healthComponent == healthComponent)
             return;
 
         TryUnsubscribe();
 
-        this.healthComponent = health;
+        this.healthComponent = healthComponent;
 
         TrySubscribe();
         UpdateHealth();
@@ -107,7 +107,7 @@ public class HealthDisplay : MonoBehaviour
         if (healthComponent == null)
             return false;
 
-        if (isDisplayed)
+        if (IsShown)
             return false;
 
         if (GetHealthPercent() > minHealthVisibilityThreshold)
@@ -138,8 +138,7 @@ public class HealthDisplay : MonoBehaviour
 
     public void UpdateHealth()
     {
-        if (!isDisplayed)
-            return;
+        if (!IsShown) return;
 
         UpdateHealthBar();
     }

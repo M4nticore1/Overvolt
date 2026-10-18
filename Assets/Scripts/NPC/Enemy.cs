@@ -1,7 +1,12 @@
+using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IPlayerTarget
 {
+    private EnemiesManager EnemiesManager => EnemiesManager.Instance;
+
+    [SerializeField] private EnemyBehaviourController[] behaviourControllers;
+
     [SerializeField] private Collider hitCollider;
     public Collider HitCollider => hitCollider;
 
@@ -18,19 +23,58 @@ public class Enemy : MonoBehaviour, IPlayerTarget
     [SerializeField] private Transform playerTargetMarkerPoint;
     public Transform PlayerTargetMarkerPoint => playerTargetMarkerPoint;
 
+    public IEnemyTarget CurrentTarget { get; private set; }
+
+    public event Action<IEnemyTarget> OnTargetSet;
+    public event Action<IEnemyTarget> OnTargetRemoved;
+
     private void OnEnable()
     {
-        healthComponent.OnDied += HandleDied;
+        if (EnemiesManager != null) {
+            EnemiesManager.RegisterEnemy(this);
+        }
+
+        if (healthComponent != null) {
+            healthComponent.OnDied += HandleDied;
+        }
     }
 
     private void OnDisable()
     {
-        healthComponent.OnDied -= HandleDied;
+        if (EnemiesManager != null) {
+            EnemiesManager.UnregisterEnemy(this);
+        }
+
+        if (healthComponent != null) {
+            healthComponent.OnDied -= HandleDied;
+        }
     }
 
-    private void Update()
+    public void Tick()
     {
+        foreach (var controller in behaviourControllers) {
+            if (controller == null) continue;
+
+            controller.Tick();
+        }
+
         TryDestroy();
+    }
+
+    public void SetTarget(IEnemyTarget target)
+    {
+        if (CurrentTarget == target) return;
+
+        var lastTarget = CurrentTarget;
+
+        if (target is MonoBehaviour targetMono && targetMono != null) {
+            CurrentTarget = target;
+            OnTargetSet?.Invoke(target);
+        }
+        else {
+            CurrentTarget = null;
+            OnTargetRemoved?.Invoke(lastTarget);
+        }
     }
 
     private void TryDestroy()
@@ -47,6 +91,10 @@ public class Enemy : MonoBehaviour, IPlayerTarget
 
     private void HandleDied()
     {
-        hitCollider.enabled = false;
+        SetTarget(null);
+
+        if (hitCollider != null) {
+            hitCollider.enabled = false;
+        }
     }
 }

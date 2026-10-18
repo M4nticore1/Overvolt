@@ -1,24 +1,76 @@
 using UnityEngine;
-using UnityEngine.AI;
 
-public class EnemyMoveController : MonoBehaviour
+public class EnemyMoveController : EnemyBehaviourController
 {
-    [SerializeField] private NavMeshAgent navAgent;
+    [Header("Movement")]
+    [SerializeField] private NPCMovement movement;
     [SerializeField] private EnemyDetectController detectTargetController;
 
-    private void OnEnable()
+    [Header("Params")]
+    [SerializeField] private float updateDestinationFrequency = 0.5f;
+    private float currentUpdateDestinationTime = 0f;
+
+    protected override void Subscribe()
     {
-        detectTargetController.OnDetected += HandleTargetDetected;
+        base.Subscribe();
+
+        Enemy.HealthComponent.OnDied += HandleDied;
+
+        Enemy.OnTargetSet += HandleTargetSet;
+        Enemy.OnTargetRemoved += HandleTargetRemoved;
     }
 
-    private void OnDisable()
+    protected override void Unsubscribe()
     {
-        detectTargetController.OnDetected -= HandleTargetDetected;
+        base.Unsubscribe();
+
+        Enemy.HealthComponent.OnDied -= HandleDied;
+
+        Enemy.OnTargetSet -= HandleTargetSet;
+        Enemy.OnTargetRemoved -= HandleTargetRemoved;
     }
 
-    private void HandleTargetDetected(IEnemyTarget target)
+    public override void Tick()
     {
-        Debug.Log("Detected");
-        navAgent.SetDestination(target.transform.position);
+        if (Enemy.CurrentTarget != null) {
+            currentUpdateDestinationTime += Time.deltaTime;
+
+            if (currentUpdateDestinationTime >= updateDestinationFrequency) {
+                MoveToCurrentTarget();
+                currentUpdateDestinationTime = 0;
+            }
+        }
+        else {
+            currentUpdateDestinationTime = 0f;
+        }
+    }
+
+    private void HandleDied()
+    {
+        StopMoving();
+    }
+
+    private void HandleTargetSet(IEnemyTarget target)
+    {
+        MoveToCurrentTarget();
+    }
+
+    private void HandleTargetRemoved(IEnemyTarget target)
+    {
+        MoveToCurrentTarget();
+    }
+
+    private void MoveToCurrentTarget()
+    {
+        if (!Enemy.HealthComponent.IsAlive) return;
+
+        if (Enemy.CurrentTarget is MonoBehaviour targetMono && targetMono != null) {
+            movement.TryMoveTo(Enemy.CurrentTarget.transform.position);
+        }
+    }
+
+    private void StopMoving()
+    {
+        movement.TryStopMoving();
     }
 }

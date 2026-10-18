@@ -1,0 +1,143 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2990713927479025101
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1723877868997562129, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_Color.g
+      value: 0.78333354
+      objectReference: {fileID: 0}
+    - target: {fileID: 1723877868997562129, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_Color.r
+      value: 0.35000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542682256423297809, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542682256423297809, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542682256423297809, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542682256423297809, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542682256423297809, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542682256423297809, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542682256423297809, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542682256423297809, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542682256423297809, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542682256423297809, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542682256423297809, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542682256423297809, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542682256423297809, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542682256423297809, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542682256423297809, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542682256423297809, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542682256423297809, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4576465127376716017, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4576465127376716017, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7319374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4576465127376716017, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_Color.r
+      value: 0.19999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737285963731576897, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f20f071cede42064bb3eb107f1d203e4, type: 3}
+    - target: {fileID: 8575996528240112604, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      propertyPath: m_Name
+      value: HeadquaterEnergyDisplay
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8575996528240112604, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5959111522515372231}
+  m_SourcePrefab: {fileID: 100100000, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+--- !u!114 &1586384937092898108 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4576465127376716017, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+  m_PrefabInstance: {fileID: 2990713927479025101}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!1 &6810895225067630097 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8575996528240112604, guid: 9c3e4aba6ce4d7b4ca376352492ba9d6, type: 3}
+  m_PrefabInstance: {fileID: 2990713927479025101}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5959111522515372231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6810895225067630097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88a712622463f7d44bfe382d56278b6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HeadquaterEnergyDisplay
+  energyBar: {fileID: 1586384937092898108}

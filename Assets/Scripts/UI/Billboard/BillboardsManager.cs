@@ -28,8 +28,6 @@ public class BillboardsManager : MonoBehaviour
 
     public void Unregister(Billboard billboard)
     {
-        if (billboard == null) return;
-
         billboards.Remove(billboard);
     }
 
@@ -37,6 +35,7 @@ public class BillboardsManager : MonoBehaviour
     {
         for (int i = billboards.Count - 1; i >= 0; i--) {
             var billboard = billboards[i];
+
             if (billboard == null) {
                 billboards.RemoveAt(i);
                 continue;
