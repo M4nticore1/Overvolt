@@ -181,7 +181,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
-  minHealthVisibilityThreshold: 0.999
+  minHealthVisibilityThreshold: 1
   visibilityTime: 5
 --- !u!114 &7322078767434900048
 MonoBehaviour:

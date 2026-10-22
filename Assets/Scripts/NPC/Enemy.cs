@@ -50,6 +50,13 @@ public class Enemy : MonoBehaviour, IPlayerTarget
         }
     }
 
+    public void Init(EnemyData data)
+    {
+        if (data == null) {
+            Debug.LogError("EnemyData is not valid!");
+        }
+    }
+
     public void Tick()
     {
         foreach (var controller in behaviourControllers) {
@@ -75,6 +82,14 @@ public class Enemy : MonoBehaviour, IPlayerTarget
             CurrentTarget = null;
             OnTargetRemoved?.Invoke(lastTarget);
         }
+    }
+
+    public static Enemy Create(Enemy enemyPrefab, Vector3 position, Quaternion rotation, EnemyData enemyData)
+    {
+        var enemy = Instantiate(enemyPrefab, position, rotation);
+        enemy.Init(enemyData);
+
+        return enemy;
     }
 
     private void TryDestroy()

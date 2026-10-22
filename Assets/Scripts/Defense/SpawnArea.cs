@@ -4,6 +4,13 @@ public class SpawnArea : MonoBehaviour
 {
     [SerializeField] private Vector2 areaSize = Vector2.zero;
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(Vector3.zero, new Vector3(areaSize.x, 0, areaSize.y));
+    }
+
     public Vector3 GetRandomSpawnPosition()
     {
         var x = UnityEngine.Random.Range(-areaSize.x / 2, areaSize.x / 2);
@@ -15,10 +22,8 @@ public class SpawnArea : MonoBehaviour
         return transform.TransformPoint(localPosition);
     }
 
-    private void OnDrawGizmosSelected()
+    public Quaternion GetSpawnRotation()
     {
-        Gizmos.matrix = transform.localToWorldMatrix;
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(Vector3.zero, new Vector3(areaSize.x, 0, areaSize.y));
+        return transform.rotation;
     }
 }

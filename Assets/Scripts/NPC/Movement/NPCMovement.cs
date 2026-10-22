@@ -6,14 +6,19 @@ public class NPCMovement : MonoBehaviour
 {
     private NPCMovementManager movementManager => NPCMovementManager.Instance;
 
+    [Header("Main")]
     [SerializeField] private NavMeshAgent navAgent;
     public NavMeshAgent NavAgent => navAgent;
+
+    [Header("Position")]
+    [SerializeField] private float maxSampleDistance = 5f;
 
     [Header("Rotation")]
     [SerializeField] private bool useTargetRotation = true;
     [SerializeField] private float rotationSpeed = 1f;
 
-    public bool IsMoving { get; private set; } = false;
+    [Header("Debug")]
+    [field: SerializeField] public bool IsMoving { get; private set; } = false;
 
     public Vector3? TargetPosition { get; private set; } = null;
     public Quaternion? TargetRotation { get; private set; } = null;
@@ -24,7 +29,7 @@ public class NPCMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        if (movementManager) {
+        if (movementManager != null) {
             movementManager.RegisterMovement(this);
         }
         else {
@@ -34,7 +39,7 @@ public class NPCMovement : MonoBehaviour
 
     private void OnDisable()
     {
-        if (movementManager) {
+        if (movementManager != null) {
             movementManager.UnregisterMovement(this);
         }
     }
@@ -78,6 +83,17 @@ public class NPCMovement : MonoBehaviour
     public bool TryMoveTo(Vector3 position, bool useReachedPosition = true)
     {
         if (!CanStartMoving()) return false;
+
+        if (NavMesh.SamplePosition(position, out NavMeshHit hit, maxSampleDistance, navAgent.areaMask)) {
+            position = hit.position;
+        }
+        else {
+            return false;
+        }
+
+        if (IsMoving && TargetPosition.HasValue && Vector3.SqrMagnitude(TargetPosition.Value - position) < 0.01f) {
+            return true;
+        }
 
         if (IsReachedPosition(position)) {
             IsMoving = false;
@@ -131,7 +147,7 @@ public class NPCMovement : MonoBehaviour
     // Check
     public bool CanStartMoving()
     {
-        if (!navAgent) return false;
+        if (navAgent == null) return false;
         if (!navAgent.enabled) return false;
         if (!navAgent.isOnNavMesh) return false;
 
@@ -140,7 +156,7 @@ public class NPCMovement : MonoBehaviour
 
     public bool CanStopMoving()
     {
-        if (!navAgent) return false;
+        if (navAgent == null) return false;
         if (!IsMoving) return false;
         if (!navAgent.enabled) return false;
         if (!navAgent.isOnNavMesh) return false;
