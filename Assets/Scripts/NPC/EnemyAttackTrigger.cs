@@ -6,13 +6,13 @@ public class EnemyAttackTrigger : MonoBehaviour
     [SerializeField] private GameObject enemyTargetGameObject;
     [SerializeField] private Collider triggerCollider;
 
-    private IEnemyTarget enemyTarget;
+    private IEnemyCombatTarget enemyTarget;
     private readonly Dictionary<Collider, EnemyCombatController> activeControllers = new Dictionary<Collider, EnemyCombatController>();
 
     private void Awake()
     {
         if (enemyTargetGameObject != null) {
-            enemyTarget = enemyTargetGameObject.GetComponent<IEnemyTarget>();
+            enemyTarget = enemyTargetGameObject.GetComponent<IEnemyCombatTarget>();
         }
 
         if (enemyTarget == null) {

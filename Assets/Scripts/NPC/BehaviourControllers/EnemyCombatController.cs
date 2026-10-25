@@ -58,14 +58,12 @@ public class EnemyCombatController : EnemyBehaviourController
     }
 
     // ----- Attacking -----
-    public void TryStartAttackingTarget(IEnemyTarget target, bool blockStopAttacking = false)
+    public void TryStartAttackingTarget(IEnemyCombatTarget target, bool blockStopAttacking = false)
     {
         if (target == null) return;
         if (target is MonoBehaviour targetMono && targetMono == null) return;
 
-        Debug.Log("TryAttack");
         if (Enemy.CurrentTarget == null || Enemy.CurrentTarget == target) {
-            Debug.Log("TryAttack1");
             Enemy.SetTarget(target);
             StartAttacking(blockStopAttacking);
         }
@@ -115,7 +113,7 @@ public class EnemyCombatController : EnemyBehaviourController
     }
 
     // ----- Events -----
-    private void HandleTargetRemoved(IEnemyTarget target)
+    private void HandleTargetRemoved(IEnemyCombatTarget target)
     {
         //TryStopAttakingCurrentTarget();
     }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerCharacter : MonoBehaviour, IEnemyTarget
+public class PlayerCharacter : MonoBehaviour, IEnemyCombatTarget
 {
     private static PlayerCharacter instance;
     public static PlayerCharacter Instance => instance ??= FindFirstObjectByType<PlayerCharacter>();

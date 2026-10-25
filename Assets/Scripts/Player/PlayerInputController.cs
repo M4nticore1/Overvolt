@@ -13,6 +13,9 @@ public class PlayerInputController : MonoBehaviour
     private InputAction sprintIA;
     public InputAction SprintIA => sprintIA ??= GetInputAction("Sprint");
 
+    private InputAction interactIA;
+    public InputAction InteractIA => interactIA ??= GetInputAction("Interact");
+
     private InputAction GetInputAction(string inputActionName)
     {
         if (inputActionAsset != null) {

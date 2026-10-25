@@ -6,10 +6,10 @@ public class PlayerShootTargetController : MonoBehaviour
     private static PlayerShootTargetController instance;
     public static PlayerShootTargetController Instance => instance ??= FindFirstObjectByType<PlayerShootTargetController>();
 
-    public IPlayerTarget CurrentTarget { get; private set; }
+    public IPlayerCombatTarget CurrentTarget { get; private set; }
 
-    public event Action<IPlayerTarget> OnTargetSet;
-    public event Action<IPlayerTarget> OnTargetRemoved;
+    public event Action<IPlayerCombatTarget> OnTargetSet;
+    public event Action<IPlayerCombatTarget> OnTargetRemoved;
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class PlayerShootTargetController : MonoBehaviour
         }
     }
 
-    public void SetTarget(IPlayerTarget target)
+    public void SetTarget(IPlayerCombatTarget target)
     {
         if (target == null) {
             Debug.LogError("Target is not valid!");
@@ -50,7 +50,7 @@ public class PlayerShootTargetController : MonoBehaviour
         OnTargetSet?.Invoke(target);
     }
 
-    public void RemoveTarget(IPlayerTarget target)
+    public void RemoveTarget(IPlayerCombatTarget target)
     {
         if (target == null) {
             Debug.LogError("Target is not valid!");

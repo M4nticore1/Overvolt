@@ -50,12 +50,12 @@ public class EnemyMoveController : EnemyBehaviourController
         StopMoving();
     }
 
-    private void HandleTargetSet(IEnemyTarget target)
+    private void HandleTargetSet(IEnemyCombatTarget target)
     {
         MoveToCurrentTarget();
     }
 
-    private void HandleTargetRemoved(IEnemyTarget target)
+    private void HandleTargetRemoved(IEnemyCombatTarget target)
     {
         MoveToCurrentTarget();
     }

@@ -56,7 +56,7 @@ public class Weapon : MonoBehaviour
     public event Action<BulletShotData> OnBulletShot;
     public event Action OnShot;
 
-    public bool TryShootTarget(IPlayerTarget target)
+    public bool TryShootTarget(IPlayerCombatTarget target)
     {
         if (Time.time < nextFireTime) return false;
 
@@ -65,7 +65,7 @@ public class Weapon : MonoBehaviour
         return true;
     }
 
-    private void ShootTarget(IPlayerTarget target)
+    private void ShootTarget(IPlayerCombatTarget target)
     {
         var targetPoint = Vector3.zero;
 

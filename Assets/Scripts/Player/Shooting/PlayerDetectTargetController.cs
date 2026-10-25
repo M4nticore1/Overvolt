@@ -14,8 +14,8 @@ public class PlayerDetectTargetController : MonoBehaviour
     [SerializeField] private float findTargetFrequency = 1f;
     private float findTimeTime = 0f;
 
-    private List<IPlayerTarget> targetsList = new();
-    private IPlayerTarget lastTarget;
+    private List<IPlayerCombatTarget> targetsList = new();
+    private IPlayerCombatTarget lastTarget;
 
     private void OnEnable()
     {
@@ -31,7 +31,7 @@ public class PlayerDetectTargetController : MonoBehaviour
     {
         if (other == null) return;
 
-        var playerTarget = other.GetComponent<IPlayerTarget>();
+        var playerTarget = other.GetComponent<IPlayerCombatTarget>();
         if (playerTarget == null) return;
 
         AddTarget(playerTarget);
@@ -39,7 +39,7 @@ public class PlayerDetectTargetController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        var playerTarget = other.GetComponent<IPlayerTarget>();
+        var playerTarget = other.GetComponent<IPlayerCombatTarget>();
         if (playerTarget == null) return;
 
         RemoveTarget(playerTarget);
@@ -51,7 +51,7 @@ public class PlayerDetectTargetController : MonoBehaviour
 
         if (findTimeTime >= findTargetFrequency) {
             float minDistance = Mathf.Infinity;
-            IPlayerTarget nearestTarget = null;
+            IPlayerCombatTarget nearestTarget = null;
 
             for (int i = targetsList.Count - 1; i >= 0; i--) {
                 var target = targetsList[i];
@@ -64,7 +64,7 @@ public class PlayerDetectTargetController : MonoBehaviour
                 var direction = (target.PlayerTargetShootPoint.position - detectTargetStartPoint.position).normalized;
 
                 if (Physics.Raycast(detectTargetStartPoint.position, direction, out var hit, distance)) {
-                    var hittedTarget = hit.collider.GetComponent<IPlayerTarget>();
+                    var hittedTarget = hit.collider.GetComponent<IPlayerCombatTarget>();
 
                     if (hittedTarget != target) continue;
                 }
@@ -93,7 +93,7 @@ public class PlayerDetectTargetController : MonoBehaviour
         findingTrigger.radius = radius;
     }
 
-    private void AddTarget(IPlayerTarget target)
+    private void AddTarget(IPlayerCombatTarget target)
     {
         if (target == null) return;
 
@@ -102,7 +102,7 @@ public class PlayerDetectTargetController : MonoBehaviour
         }
     }
 
-    private void RemoveTarget(IPlayerTarget target)
+    private void RemoveTarget(IPlayerCombatTarget target)
     {
         targetsList.Remove(target);
     }

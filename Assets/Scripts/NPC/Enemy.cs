@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IPlayerTarget
+public class Enemy : MonoBehaviour, IPlayerCombatTarget
 {
     private EnemiesManager EnemiesManager => EnemiesManager.Instance;
 
@@ -23,10 +23,10 @@ public class Enemy : MonoBehaviour, IPlayerTarget
     [SerializeField] private Transform playerTargetMarkerPoint;
     public Transform PlayerTargetMarkerPoint => playerTargetMarkerPoint;
 
-    public IEnemyTarget CurrentTarget { get; private set; }
+    public IEnemyCombatTarget CurrentTarget { get; private set; }
 
-    public event Action<IEnemyTarget> OnTargetSet;
-    public event Action<IEnemyTarget> OnTargetRemoved;
+    public event Action<IEnemyCombatTarget> OnTargetSet;
+    public event Action<IEnemyCombatTarget> OnTargetRemoved;
 
     private void OnEnable()
     {
@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour, IPlayerTarget
         TryDestroy();
     }
 
-    public void SetTarget(IEnemyTarget target)
+    public void SetTarget(IEnemyCombatTarget target)
     {
         if (CurrentTarget == target) return;
 

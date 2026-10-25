@@ -24,11 +24,11 @@ public class EnemyDetectController : EnemyBehaviourController
     private float currentUndetectingTime = 0f;
     private bool isTargetOnView = false;
 
-    private readonly List<IEnemyTarget> triggeredTargets = new();
-    private readonly Dictionary<Collider, IEnemyTarget> cachedTargets = new();
+    private readonly List<IEnemyCombatTarget> triggeredTargets = new();
+    private readonly Dictionary<Collider, IEnemyCombatTarget> cachedTargets = new();
 
-    public event Action<IEnemyTarget> OnDetected;
-    public event Action<IEnemyTarget> OnUndetected;
+    public event Action<IEnemyCombatTarget> OnDetected;
+    public event Action<IEnemyCombatTarget> OnUndetected;
 
     private void Start()
     {
@@ -40,7 +40,7 @@ public class EnemyDetectController : EnemyBehaviourController
         if (other == null) return;
 
         if (!cachedTargets.TryGetValue(other, out var target)) {
-            target = other.GetComponent<IEnemyTarget>();
+            target = other.GetComponent<IEnemyCombatTarget>();
             if (target == null) return;
             cachedTargets[other] = target;
         }
@@ -109,7 +109,7 @@ public class EnemyDetectController : EnemyBehaviourController
         }
     }
 
-    private void AddTriggeredTarget(IEnemyTarget target)
+    private void AddTriggeredTarget(IEnemyCombatTarget target)
     {
         if (target is MonoBehaviour targetMono && targetMono == null) return;
 
@@ -118,7 +118,7 @@ public class EnemyDetectController : EnemyBehaviourController
         }
     }
 
-    private void RemoveTriggeredTarget(IEnemyTarget target)
+    private void RemoveTriggeredTarget(IEnemyCombatTarget target)
     {
         triggeredTargets.Remove(target);
     }
@@ -157,9 +157,9 @@ public class EnemyDetectController : EnemyBehaviourController
         ClearTriggeredTargets();
     }
 
-    private List<IEnemyTarget> GetAllVisibleTargets()
+    private List<IEnemyCombatTarget> GetAllVisibleTargets()
     {
-        var targets = new List<IEnemyTarget>();
+        var targets = new List<IEnemyCombatTarget>();
 
         for (int i = 0; i < triggeredTargets.Count; i++) {
             var target = triggeredTargets[i];
@@ -184,10 +184,10 @@ public class EnemyDetectController : EnemyBehaviourController
         return targets;
     }
 
-    private IEnemyTarget GetNearestTarget()
+    private IEnemyCombatTarget GetNearestTarget()
     {
         var visibleTargets = GetAllVisibleTargets();
-        IEnemyTarget nearestTarget = null;
+        IEnemyCombatTarget nearestTarget = null;
         var minDistance = float.MaxValue;
 
         for (int i = 0; i < visibleTargets.Count; i++) {
@@ -207,7 +207,7 @@ public class EnemyDetectController : EnemyBehaviourController
         return nearestTarget;
     }
 
-    private bool ShouldAddTarget(IEnemyTarget target)
+    private bool ShouldAddTarget(IEnemyCombatTarget target)
     {
         if (target == null) return false;
         if (target is MonoBehaviour targetMono && targetMono == null) return false;

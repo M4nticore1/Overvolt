@@ -43,13 +43,13 @@ public class ShootingTargetMarkerController : MonoBehaviour
         }
     }
 
-    private void HandleTargetSet(IPlayerTarget target)
+    private void HandleTargetSet(IPlayerCombatTarget target)
     {
         DestroyMarker();
         SpawnMarker(target.PlayerTargetMarkerPoint);
     }
 
-    private void HandleTargetRemoved(IPlayerTarget target)
+    private void HandleTargetRemoved(IPlayerCombatTarget target)
     {
         DestroyMarker();
     }
